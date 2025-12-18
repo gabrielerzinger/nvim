@@ -201,15 +201,6 @@ local M = {
     commit = "e071a098ac1e56e349af649c25e982348f5504e5",
   },
 
-  -- Brex's custom kotlin-ls with Bazel support
-  {
-    "brexhq/kotlin-bazel.nvim",
-    dir = "~/src/kotlin-bazel.nvim",
-    dev = true,
-    ft = "kotlin",
-    enabled = v.env == "work",
-  },
-
   -- extension for typescript-ls
   {
     "pmizio/typescript-tools.nvim",
