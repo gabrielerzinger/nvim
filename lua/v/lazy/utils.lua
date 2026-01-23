@@ -66,7 +66,7 @@ end
 ---@return boolean
 function M.is_installed(plugin)
   local ok, installed = pcall(function()
-    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.installed
+    return require("lazy.core.config").plugins[plugin]._.installed
   end)
   return ok and installed
 end
@@ -78,8 +78,7 @@ function M.is_loaded(plugin)
     return true
   end
   local ok, loaded = pcall(function()
-    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.loaded
-      ~= nil
+    return require("lazy.core.config").plugins[plugin]._.loaded ~= nil
   end)
 
   return ok and loaded
