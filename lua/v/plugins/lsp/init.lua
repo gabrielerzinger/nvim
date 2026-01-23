@@ -212,7 +212,11 @@ local M = {
       "typescriptreact",
       "typescript.tsx",
     },
-    commit = "3c501d7c7f79457932a8750a2a1476a004c5c1a9",
+    commit = "c2f5910074103705661e9651aa841e0d7eea9932",
+    dependencies = {
+      "plenary.nvim",
+      "nvim-lspconfig",
+    },
   },
 }
 

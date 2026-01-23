@@ -1,11 +1,11 @@
-local config = require("v.lsp").make_config()
 local ok, ts_ls = pcall(require, "v.lsp.servers.ts_ls")
+local config = require("v.lsp").make_config(ts_ls)
 
 if ok then
   config = vim.tbl_deep_extend("force", config, ts_ls.config)
 end
 
-require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
+require("typescript-tools").setup(vim.tbl_deep_extend("force", config, {
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it
     separate_diagnostic_server = true,
@@ -56,7 +56,7 @@ require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
     include_completions_with_insert_text = true,
     code_lens = "off", -- experimental
     disable_member_code_lens = true,
-    jsx_close_tag = { -- handled by [nvim-ts-autotag] already
+    jsx_close_tag = { -- handled by nvim-ts-autotag already
       enable = false,
       filetypes = { "javascriptreact", "typescriptreact" },
     },
@@ -70,6 +70,11 @@ local filetypes = vim.lsp.config.ts_ls.filetypes or {}
 for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
   local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
   if vim.tbl_contains(filetypes, ft) then
-    vim.api.nvim_exec_autocmds("FileType", { group = "lspconfig", buffer = bufnr })
+    vim.api.nvim_buf_call(bufnr, function()
+      vim.api.nvim_exec_autocmds("FileType", {
+        group = "nvim.lsp.enable",
+        buffer = bufnr,
+      })
+    end)
   end
 end
