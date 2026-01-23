@@ -1,16 +1,16 @@
 ---@module "lazy.types"
 
 local M = {}
-local log_not_found_configs = true
+local log_not_found_configs = false
 
 ---@param plugin_name string
----@param type "plugin"|"theme"
+---@param plugin_type "plugin"|"theme"
 ---@param group "appearance"|"general"|"git"|"lsp"|"navigation"|"syntax"?
 ---@return string?
-local function get_plugin_config_module(plugin_name, type, group)
-  local res = "v." .. type .. "s."
+local function get_plugin_config_module(plugin_name, plugin_type, group)
+  local res = "v." .. plugin_type .. "s."
 
-  if type == "plugin" then
+  if plugin_type == "plugin" then
     if not group then
       local message = ("No group provided to plugin [%s], configuration not found."):format(
         plugin_name
@@ -27,24 +27,25 @@ local function get_plugin_config_module(plugin_name, type, group)
 end
 
 ---@param plugin_name string
----@param type "plugin"|"theme"
+---@param plugin_type "plugin"|"theme"
 ---@param group "appearance"|"general"|"git"|"lsp"|"navigation"|"syntax"?
 ---@return fun(plugin: LazyPlugin, opts: table)?
-local function get_plugin_config(plugin_name, type, group)
-  local module = get_plugin_config_module(plugin_name, type, group)
+local function get_plugin_config(plugin_name, plugin_type, group)
+  local module = get_plugin_config_module(plugin_name, plugin_type, group)
 
-  if not module and type == "plugin" then
+  if not module and plugin_type == "plugin" then
     return nil
   end
 
-  local colorscheme = require("v.settings").appearance.colorscheme
-  local is_primary_colorscheme = type == "theme" and plugin_name == colorscheme
+  local is_primary_colorscheme = plugin_type == "theme"
+    and plugin_name == require("v.settings").appearance.colorscheme
 
   return function(_, _)
-    local ok, config = pcall(require, module)
+    local ok, cfg = pcall(require, module)
+    local not_found = type(cfg) == "string" and cfg:match("module %S+ not found")
 
-    if log_not_found_configs and not ok then
-      require("v.utils.log").log(plugin_name, type, group, module, config)
+    if not ok and (log_not_found_configs or not not_found) then
+      require("v.utils.log").log(plugin_name, plugin_type, group, module, cfg)
     end
 
     if is_primary_colorscheme then
