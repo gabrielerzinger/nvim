@@ -80,7 +80,7 @@ function M.on_attach(client, bufnr)
     config.on_attach(client, bufnr)
   end
 
-  setup_autocmds(client)
+  setup_autocmds(client, bufnr)
 end
 
 return M
