@@ -51,7 +51,34 @@ function M.on_attach(client, bufnr)
 
   if v.plug.is_loaded("typescript-tools.nvim") then
     require("v.utils.autocmds").augroup("SortImportsTS", {
-      { event = "BufWritePre", opts = { command = "TSToolsOrganizeImports", buffer = 0 } },
+      {
+        event = "BufWritePre",
+        opts = {
+          callback = function()
+            local view = vim.fn.winsaveview()
+            local ok, _ = pcall(function()
+              require("typescript-tools.api").organize_imports(true)
+            end)
+
+            if not ok then
+              return
+            end
+
+            vim.fn.winrestview(view)
+
+            if bufnr == vim.api.nvim_get_current_buf() then
+              vim.api.nvim_exec2(":noautocmd update", { output = false })
+            else
+              vim.notify(
+                "Organized imports for buffer " .. bufnr,
+                vim.log.levels.INFO,
+                { title = "TS --- Organize Imports" }
+              )
+            end
+          end,
+          buffer = 0,
+        },
+      },
     })
 
     utils.map({ "n", "<leader>si", "<cmd>TSToolsOrganizeImports<CR>" })
