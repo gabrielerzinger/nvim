@@ -121,7 +121,6 @@ o.sessionoptions = {
   "curdir",
   "folds",
   "help",
-  "localoptions", -- needed to starts highlights
   "tabpages",
   "winpos",
   "winsize",

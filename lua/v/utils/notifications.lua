@@ -14,6 +14,7 @@ local banned_messages = {
   "method textDocument/signatureHelp is not supported by any of the servers registered for the current buffer",
   "method textDocument/hover is not supported by any of the servers registered for the current buffer",
   "no manual entry for",
+  "tsserver_provider.lua:%d+: Invalid buffer name!",
 }
 
 ---@type table<string, vim.log.levels>
@@ -39,7 +40,7 @@ function M.notify(msg, level, opts)
   end
 
   for _, it in ipairs(banned_messages) do
-    if msg:contains(it) then
+    if msg:contains(it) or msg:match(it) then
       return
     end
   end
