@@ -68,6 +68,31 @@ require("auto-session").setup({
   purge_after_minutes = 60 * 24 * 15,
   -- close unwanted windows before saving
   pre_save_cmds = { "silent! tabdo NvimTreeClose" },
+  -- re-trigger FileType for lazy.nvim plugins that use `ft` loading
+  post_restore_cmds = {
+    function()
+      vim.defer_fn(function()
+        local cur_bufnr = vim.api.nvim_get_current_buf()
+        local cur_ft = vim.api.nvim_get_option_value("filetype", { buf = cur_bufnr })
+
+        -- if we're on the dashboard, it'll take care of triggering the autocmds
+        if cur_ft == "dashboard" then
+          return
+        end
+
+        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+          if vim.api.nvim_buf_is_loaded(bufnr) then
+            local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+            if ft and ft ~= "" then
+              vim.api.nvim_buf_call(bufnr, function()
+                vim.api.nvim_exec_autocmds("FileType", { buffer = bufnr })
+              end)
+            end
+          end
+        end
+      end, 30)
+    end,
+  },
   session_lens = {
     load_on_setup = true,
     previewer = false,
