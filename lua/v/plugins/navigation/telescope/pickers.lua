@@ -18,6 +18,7 @@ local ignored = {
   ".git",
   ".gitignore",
   "spell/",
+  "src/generated/",
 }
 
 ---@return PickerShortcutTable
@@ -29,6 +30,9 @@ local function get_shortcut_table()
   return {
     ["l"] = { extension = "lua" },
     ["v"] = { extension = "vim" },
+    ["p"] = { extension = "py", glob = "!*_test.py", fzf_token = "!_test.py$" },
+    ["py"] = { extension = "py" },
+    ["pys"] = { glob = "*_test.py", fzf_token = "_test.py$", extension = "py" },
     ["k"] = { glob = "!*Test.kt", fzf_token = "!Test.kt$", extension = "kt" },
     ["kt"] = { extension = "kt" },
     ["kts"] = { glob = "*Test.kt", fzf_token = "Test.kt$", extension = "kt" },
@@ -39,7 +43,8 @@ local function get_shortcut_table()
     ["r"] = { extensions = { "tsx", "jsx" } },
     ["x"] = { extension = "ex" },
     ["xs"] = { extensions = { "ex", "exs" } },
-    ["p"] = { extensions = { "proto" } },
+    ["g"] = { extensions = { "graphqls", "graphql" } },
+    ["pr"] = { extensions = { "proto" } },
     ["%"] = { glob = cur_buf, fzf_token = cur_buf },
     ["."] = { path = cur_buf_dir }, -- curr buf's dir
     [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir

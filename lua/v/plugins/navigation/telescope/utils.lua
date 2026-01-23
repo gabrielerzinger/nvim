@@ -94,16 +94,6 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
         table.insert(output.fzf_tokens, res.path)
       end
 
-      --globs
-      if res.glob then
-        table.insert(output.globs, res.glob)
-      end
-
-      --globs
-      if res.fzf_token then
-        table.insert(output.fzf_tokens, res.fzf_token)
-      end
-
       -- extensions
       if res.extension then
         table.insert(output.extensions, res.extension)
@@ -116,6 +106,16 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
           table.insert(output.globs, "*." .. it)
           table.insert(output.fzf_tokens, "." .. it .. "$")
         end
+      end
+
+      --globs
+      if res.glob then
+        table.insert(output.globs, res.glob)
+      end
+
+      --globs
+      if res.fzf_token then
+        table.insert(output.fzf_tokens, res.fzf_token)
       end
 
       -- debug
