@@ -41,7 +41,11 @@ local function setup_autocmds(client, bufnr)
         event = "BufWritePost",
         opts = {
           callback = function()
-            vim.lsp.buf.format({ async = true })
+            vim.schedule(function()
+              vim.defer_fn(function()
+                vim.lsp.buf.format({ async = true })
+              end, 100)
+            end)
           end,
           buffer = bufnr,
         },

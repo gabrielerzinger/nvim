@@ -30,6 +30,7 @@ M.config = {
   lintCommand = ktlint_cmd .. " --stdin",
   formatStdin = true,
   formatCommand = ktlint_cmd .. " -F --stdin || true",
+  -- FormatIgnoreExitCode = true, -- can be added after updated to https://github.com/mattn/efm-langserver/pull/285
 }
 
 return M

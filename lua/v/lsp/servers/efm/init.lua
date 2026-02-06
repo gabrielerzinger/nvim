@@ -40,7 +40,8 @@ local eslint_d = {
   lintIgnoreExitCode = true,
   formatCommand = "eslint_d -f visualstudio --fix-to-stdout --stdin --stdin-filename=${INPUT}",
   formatStdin = true,
-  lintSource = "eslint_d",
+  lintSource = "",
+  prefix = "eslint",
   rootMarkers = {
     ".eslintrc.cjs",
     ".eslintrc.js",

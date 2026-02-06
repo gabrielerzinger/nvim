@@ -7,6 +7,7 @@
   "cssmodules-language-server": "1.5.1",
   "dockerfile-language-server": "0.15.0",
   "efm": "v0.0.54",
+  "elixir-ls": "v0.30.0",
   "emmet-ls": "0.4.2",
   "eslint_d": "14.3.0",
   "flake8": "7.3.0",

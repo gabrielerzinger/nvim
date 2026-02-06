@@ -33,11 +33,16 @@ local pydocstyle_ignore = {
 }
 local pycodestyle_ignore = {
   "E203",
+  "W503",
+  "D407",
+  "D407",
+  "D406",
 }
 local flake8_ignore = {
   "E203",
   "F401",
   "F841",
+  "W503",
 }
 
 M.config = {
