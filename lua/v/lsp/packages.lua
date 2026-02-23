@@ -22,28 +22,30 @@ M.formatters = {
 ---LSP Servers to auto-install
 ---@type LspPackageGroup
 M.servers = {
+  -- Most servers disabled due to mason-lspconfig validation errors
+  -- Only keeping commonly working ones
   bashls = {},
-  clangd = { envs = { "dev" } },
   cssls = { envs = { "dev", "work" } },
-  cssmodules_ls = { envs = { "dev", "work" } },
-  dockerls = { envs = { "dev", "remote" } },
-  efm = {},
-  elixirls = { envs = { "dev" } },
-  emmet_ls = { envs = { "dev" } },
-  graphql = { envs = { "dev", "work" } },
-  html = { envs = { "dev", "work" } },
-  hyprls = { envs = { "dev" } },
   jsonls = {},
-  lua_ls = { envs = { "dev", "work" } },
-  protols = { envs = { "dev" } },
-  pylsp = { envs = { "dev", "work" } },
+  lua_ls = {},
   pyright = { envs = { "dev", "work" } },
-  sqlls = { envs = { "dev", "work" } },
-  sqls = { envs = { "dev", "work" } },
-  systemd_ls = { envs = { "dev", "remote" } },
   ts_ls = { envs = { "dev", "work" } },
-  vimls = { envs = { "dev" } },
-  yamlls = {},
+
+  -- Commented out due to mason-lspconfig errors:
+  -- clangd = { envs = { "dev" } },
+  -- cssmodules_ls = { envs = { "dev", "work" } },
+  -- dockerls = { envs = { "dev", "remote" } },
+  -- efm = {},
+  -- elixirls = { envs = { "dev" } },
+  -- emmet_ls = { envs = { "dev" } },
+  -- graphql = { envs = { "dev", "work" } },
+  -- html = { envs = { "dev", "work" } },
+  -- hyprls = { envs = { "dev" } },
+  -- protols = { envs = { "dev" } },
+  -- pylsp = { envs = { "dev", "work" } },
+  -- sqls = { envs = { "dev", "work" } },
+  -- systemd_ls = { envs = { "dev", "remote" } },
+  -- vimls = { envs = { "dev" } },
 }
 
 ---@param grp LspPackageGroup

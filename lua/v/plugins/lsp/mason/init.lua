@@ -11,10 +11,9 @@ local lockfile = require("v.plugins.lsp.mason.lock").get_lockfile()
 require("mason").setup()
 require("v.plugins.lsp.mason.lock").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = vim.tbl_map(function(pkg)
-    local version = lockfile[pkg]
-    return version and (pkg .. "@" .. version) or pkg
-  end, servers),
+  -- Disabled auto-install to avoid validation warnings
+  -- Install LSP servers manually via :Mason instead
+  ensure_installed = {},
   automatic_enable = false,
 })
 

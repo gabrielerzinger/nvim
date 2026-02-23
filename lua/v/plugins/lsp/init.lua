@@ -11,11 +11,12 @@ local M = {
 
   -- TODO: consider swapping for L3MON4D3/LuaSnip
   -- cool snippet engine
-  {
-    "SirVer/ultisnips",
-    event = "InsertEnter",
-    commit = "dbc458e110bb49299da76ec53f8b09b4f6dce28a",
-  },
+  -- Disabled: requires Python provider (pynvim)
+  -- {
+  --   "SirVer/ultisnips",
+  --   event = "InsertEnter",
+  --   commit = "dbc458e110bb49299da76ec53f8b09b4f6dce28a",
+  -- },
 
   -- setup LSP for lua-nvim dev
   {
@@ -77,7 +78,7 @@ local M = {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "ultisnips",
+      -- "ultisnips", -- Disabled: requires Python
       {
         "f3fora/cmp-spell",
         commit = "694a4e50809d6d645c1ea29015dad0c293f019d6",

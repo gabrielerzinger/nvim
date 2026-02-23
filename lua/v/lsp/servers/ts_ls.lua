@@ -42,6 +42,9 @@ local function typescript_sort_imports(bufnr, post)
 end
 
 function M.on_attach(client, bufnr)
+  -- Call the main on_attach to set up LSP keybindings
+  require("v.lsp.on_attach").on_attach(client, bufnr)
+
   require("v.lsp.on_attach").disable_formatting(client)
 
   -- if it's in an angular project, [angularls] will take care of renaming

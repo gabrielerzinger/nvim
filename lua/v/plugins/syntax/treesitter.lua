@@ -43,9 +43,9 @@ local parsers = {
   "javascript",
   "jsdoc",
   "json",
-  "jsonc",
+  -- "jsonc", -- Removed: corrupted tarball extraction error
   "kotlin",
-  "latex",
+  -- "latex", -- Removed: requires tree-sitter CLI to be installed
   "lua",
   "lua_patterns",
   "markdown",

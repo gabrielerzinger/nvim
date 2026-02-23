@@ -19,6 +19,8 @@ local ignored = {
   ".gitignore",
   "spell/",
   "src/generated/",
+  "node_modules",
+  "build",
 }
 
 ---@return PickerShortcutTable

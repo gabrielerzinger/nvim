@@ -122,19 +122,13 @@ local M = {
   -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2284979815
   -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2574767246
   -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2702160614
-  {
-    "3rd/image.nvim",
-    build = false,
-    opts = { processor = "magick_rock" },
-    event = "VeryLazy",
-    commit = "4c51d6202628b3b51e368152c053c3fb5c5f76f2",
-    dependencies = {
-      {
-        "kiyoon/magick.nvim",
-        commit = "9d4a9900c11409560f9d411773c932955494ec1f",
-      },
-    },
-  },
+  -- Disabled: requires ImageMagick and luarocks magick
+  -- {
+  --   "3rd/image.nvim",
+  --   opts = { processor = "magick_rock" },
+  --   event = "VeryLazy",
+  --   commit = "4c51d6202628b3b51e368152c053c3fb5c5f76f2",
+  -- },
 }
 
 return require("v.lazy.loader").process_plugins(M, "appearance")
